@@ -28,10 +28,20 @@ const router = createRouter({
           component: () => import('../products/views/ProductsView.vue'),
         },
         {
+          path: 'products/new',
+          name: 'new-product',
+          component: () => import('../products/views/NewProductView.vue'),
+        },
+        {
           path: 'categories',
           name: 'categories',
           component: () => import('../categories/views/CategoriesView.vue'),
-        }
+        },
+        {
+          path: 'categories/new',
+          name: 'new-category',
+          component: () => import('../categories/views/NewCategoryView.vue'),
+        },
       ]
     }
   ]

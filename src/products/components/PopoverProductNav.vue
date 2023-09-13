@@ -1,4 +1,5 @@
 <script setup lang='ts'>
+    import { RouterLink } from 'vue-router';
     import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 
     defineProps<{
@@ -9,6 +10,7 @@
                 name: string,
                 description: string,
                 icon: string,
+                path: string,
             }[]
         }
     }>()
@@ -33,10 +35,11 @@
             <PopoverPanel class="absolute z-10 mt-[1rem] border-gray-200 rounded-md border max-w-md w-full transform px-4 sm:px-0">
                 <div class="overflow-hidden rounded-lg shadow-lg ring-1 bg-white cursor-pointer ring-white ring-opacity-5">
                     <div class=" space-y-2 p-3 w-full">
-                        <a 
+                        <RouterLink
                             v-for="subOption in option.subOptions" 
                             :key="subOption.name"
                             class="flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 w-full"
+                            :to="{ name: subOption.path }"
                         >
                             <div class="flex text-xl bg-primary/20 rounded-md items-center justify-center text-primary sm:h-12 sm:w-12 ">
                                 <i  :class="subOption.icon"></i>
@@ -49,7 +52,7 @@
                                     {{ subOption.description }}
                                 </p>
                             </div>
-                        </a>
+                        </RouterLink>
                     </div>
                 </div>
             </PopoverPanel>

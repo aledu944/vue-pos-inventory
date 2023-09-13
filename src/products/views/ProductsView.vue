@@ -6,6 +6,8 @@
 
 <template>
     <ProductsNav/>
-
-    <h1>Listado de productos</h1>
+    
+    <main class="container pt-[1rem]">
+        <h1>Listado de productos</h1>
+    </main>
 </template>

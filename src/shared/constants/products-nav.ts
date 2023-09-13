@@ -4,13 +4,13 @@ export const ProductsNavOptions = [
         description: 'Gestion de productos',
         subOptions: [
             {
-                path: '/',
+                path: 'products',
                 name: 'Productos',
                 description: 'Lista de productos',
                 icon: 'uil uil-clipboard-notes',
             },
             {
-                path: '/',
+                path: 'new-product',
                 name: 'Crear un producto',
                 description: 'Crear un producto',
                 icon: 'uil uil-plus',
@@ -22,13 +22,13 @@ export const ProductsNavOptions = [
         description: 'Gestion de categorias',
         subOptions: [
             {
-                path: '/',
+                path: 'categories',
                 name: 'Categorias',
                 description: 'Categorias registradas',
                 icon: 'uil uil-clipboard-notes',
             },
             {
-                path: '/',
+                path: 'new-category',
                 name: 'Nueva categoria',
                 description: 'Crea un nueva categoria',
                 icon: 'uil uil-plus',
