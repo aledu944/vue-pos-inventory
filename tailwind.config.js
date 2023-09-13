@@ -2,10 +2,21 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'sans': ['Nunito']
+      },
+      colors: {
+        primary: '#17b39c',
+        primaryDark: 'primary',
+        
+        secondary: '#212432'
+        
+      }
+    },
   },
   plugins: [],
 }
