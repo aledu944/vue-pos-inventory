@@ -20,11 +20,23 @@
         @apply bg-white/5 py-2 px-4 text-lg w-full rounded-md outline-none border-b border-b-transparent  focus:border-b-primary
         placeholder:text-white/30
     }
+    
+    button {
+        @apply block cursor-pointer
+    }
 }
 
 @layer utilities {
     .bg-gradient {
         @apply bg-gradient-to-r from-primary to-cyan-700
+    }
+
+    .text-gradient {
+        @apply text-transparent bg-clip-text bg-gradient
+    }
+
+    .container {
+        @apply max-w-[90%] mx-auto
     }
 }
 
@@ -32,5 +44,22 @@
     .btn-primary {
         @apply bg-gradient text-white py-2 px-5 rounded-md transition-all w-full
         hover:scale-[1.025] active:scale-100
+    }
+
+    .btn-secondary {
+        @apply bg-primary text-white py-2 px-5 rounded-md transition-all w-full
+        hover:scale-[1.025] hover:bg-opacity-[0.8] active:scale-100
+    }
+
+    .navbar {
+        @apply bg-secondary flex  
+    }
+
+    .nav__link {
+        @apply px-2 rounded-md py-1 hover:nav__link--active
+    }
+
+    .nav__link--active {
+        @apply bg-primary text-white shadow-md shadow-cyan-800
     }
 }
