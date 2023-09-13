@@ -9,9 +9,9 @@
             <RouterLink class="font-extrabold md:text-2xl text-white" :to="{ name:'dashboard' }">
                 Vue <span class="text-gradient">Inventory</span>
             </RouterLink>
-            <ul class="hidden md:flex">
+            <ul class="hidden md:flex gap-4">
                 <li>
-                    <RouterLink class="nav__link" active-class="nav__link--active" :to="{ name:'dashboard' }">
+                    <RouterLink class="nav__link" active-class="nav__link--active" :to="{ name:'products' }">
                         Productos
                     </RouterLink>
                 </li>

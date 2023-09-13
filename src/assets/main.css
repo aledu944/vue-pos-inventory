@@ -4,6 +4,10 @@
 @tailwind utilities;
 
 @layer base {
+    body {
+        @apply bg-[#f0f2f3]
+    }
+
     h1 {
         @apply text-4xl font-extrabold
     }

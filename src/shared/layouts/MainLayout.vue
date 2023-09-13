@@ -7,8 +7,6 @@
 
 <template>
     <NavMenu/>
-    <main class="container pt-[3rem]">
-        <RouterView/>
-    </main>
+    <RouterView/>
 </template>
 
