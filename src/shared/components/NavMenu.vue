@@ -1,6 +1,14 @@
 <script setup lang='ts'>
-    import { RouterLink } from "vue-router";
-    import NavMenuAvatar from "./NavMenuAvatar.vue";
+
+import { RouterLink } from "vue-router";
+import NavMenuAvatar from "./NavMenuAvatar.vue";
+import { useUiStore } from '@/stores/ui';
+
+const uiStore = useUiStore();
+
+
+
+
 </script>
 
 <template>
@@ -22,7 +30,7 @@
                 </li>
             </ul>
             <NavMenuAvatar/>
-            <div class="flex md:hidden text-xl ml-4">
+            <div @click="uiStore.handleMenuState" class="flex md:hidden text-xl ml-4">
                 <i class="uil uil-bars"></i>
             </div>
         </div>
