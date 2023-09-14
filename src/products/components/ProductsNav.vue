@@ -6,7 +6,7 @@
 
 <template>
     <nav class="bg-white py-6 shadow-sm">
-        <div class="w-full flex justify-evenly container">
+        <div class="w-full flex flex-col md:flex-row gap-5 justify-evenly container">
             <PopoverProductNav 
                 v-for="option in ProductsNavOptions" 
                 :option="option"

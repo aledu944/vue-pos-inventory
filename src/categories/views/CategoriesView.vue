@@ -3,5 +3,8 @@
 </script>
 
 <template>
-    <h1>Gestiona tus categorias</h1>
+    <main class="container">
+        <h1>Gestiona tus categorias</h1>
+
+    </main>
 </template>

@@ -20,7 +20,7 @@
 <template>
     <Popover v-slot="{ open }" class="relative text-start w-full">
         <PopoverButton :class="open ? '' : 'text-opacity-90'" class="text-start focus:outline-none focus-visible:ring-2 focus:text-primary focus-visible:ring-white focus-visible:ring-opacity-75">
-            <p class="font-semibold cursor-pointer hover:text-primary">{{ option.name }}</p>
+            <p class="font-bold cursor-pointer hover:text-primary">{{ option.name }}</p>
             <p class="text-gray-400 font-semibold">{{ option.description }}</p>
         </PopoverButton>
 
