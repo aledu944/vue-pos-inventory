@@ -1,5 +1,5 @@
 <p align="center">
-  <a target="blank"><img src="https://assets.stickpng.com/images/58482acecef1014c0b5e4a1e.png" width="200" alt="Vue Logo" /></a>
+  <a target="blank"><img src="./src/assets/logo.svg" width="200" alt="Vue Logo" /></a>
 </p>
 
 # Vue Inventory
