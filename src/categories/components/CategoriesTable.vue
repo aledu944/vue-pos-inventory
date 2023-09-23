@@ -26,7 +26,7 @@
                         #{{ category.id }}
                     </p>
                     
-                    <p class="min-w-min w-full text-gray-500">Imagen</p>
+                    <img class="max-w-[70px]" :src="category.image" :alt="category.name" srcset="">
                     
                     <p class="text-gray-500">
                         {{ category.name }}

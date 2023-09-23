@@ -3,12 +3,17 @@ import { defineStore } from "pinia";
 import { onMounted, reactive, ref, type Ref } from "vue";
 import type { ICategory } from "../interfaces/category";
 import categoryService from "../services/category.service";
+import router from "@/router";
 
 interface CategoriesStore {
     isLoading: Ref<boolean>;
     categories: Ref<ICategory[]>;
 
     deleteCategory: (id: string) => Promise<void>
+    createNewCategory(image: any, category: {
+        name: string;
+        description: string;
+    }): Promise<void>
 } 
 
 export const useCategoriesStore = defineStore('categories', (): CategoriesStore => {
@@ -37,6 +42,12 @@ export const useCategoriesStore = defineStore('categories', (): CategoriesStore 
         getAllCategories();
     }
 
+    async function createNewCategory( image: any, category: { name:string, description: string } ){
+        const data = await categoryService.create(image, category);
+        getAllCategories();
+        router.back();
+    }
+
 
     onMounted(() => {
         getAllCategories();
@@ -48,6 +59,7 @@ export const useCategoriesStore = defineStore('categories', (): CategoriesStore 
 
         // METHOS
         deleteCategory,
+        createNewCategory
     }
     
 });

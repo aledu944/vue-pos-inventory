@@ -1,4 +1,7 @@
 <script setup lang='ts'>
+import { useNewCategory } from "../composables/newCategory";
+
+const { handleFileChange, handleSubmit, newCategory, preImage } = useNewCategory();
 
 </script>
 
@@ -6,10 +9,12 @@
     <div class="grid grid-cols-2">
         <div class="flex flex-col justify-center items-center">
             <h2 class="">Imagen del producto</h2>
-            <p class="text-lg md:text-xl text-gray-400">Aun no selecciono una imagen</p>
-            <img src="" alt="">
+            
+            <p v-if="preImage === ''" class="text-lg md:text-xl text-gray-400">Aun no selecciono una imagen</p>
+            <img class="max-w-sm" :src="preImage"/>
+            
         </div>
-        <form class="space-y-6">
+        <form @submit.prevent="handleSubmit" class="space-y-6">
             <div>
                 <label for="category-name">Nombre:</label>
                 <input 
@@ -17,7 +22,8 @@
                     class="border-gray-300 border-2 " 
                     type="text"
                     placeholder="Auriculares, Computadoras, Herramientas..."
-                >
+                    v-model="newCategory.name"
+                />
             </div>
             <div>
                 <label for="category-name">Descripcion:</label>
@@ -26,11 +32,12 @@
                     class="block border-gray-300 border-2" 
                     rows="3"
                     placeholder="Agrega una descripcion del producto..."
+                    v-model="newCategory.description"
                 ></textarea>
             </div>
             <div>
                 <label for="category-image">Imagen del producto:</label>
-                <input id="category-image" type="file">
+                <input @change="handleFileChange" id="category-image" type="file">
             </div>
             <button type="submit" class="btn-primary">Guardar categoria</button>
         </form>

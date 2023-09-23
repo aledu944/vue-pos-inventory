@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { RouterLink } from 'vue-router';
-import { useUiStore } from '../../stores/ui';
+import { useUiStore } from '../stores/ui';
 
 const uiStore = useUiStore();
 
@@ -60,4 +60,4 @@ const uiStore = useUiStore();
     
     }
 
-</style>
+</style>../stores/ui

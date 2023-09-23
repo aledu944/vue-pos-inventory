@@ -1,9 +1,10 @@
 <script setup lang='ts'>
 import { RouterView } from 'vue-router';
+import { useUiStore } from '../stores/ui';
 
 import NavMenu from '../components/NavMenu.vue';
 import SideMenu from '../components/SideMenu.vue';
-import { useUiStore } from '../../stores/ui';
+import ToastMessage from '../components/ToastMessage.vue';
 
 const uiStore = useUiStore();
 
@@ -11,9 +12,9 @@ const uiStore = useUiStore();
 
 <template>
     <SideMenu/>
-    <div :class="uiStore.isMenuOpen ? 'blur-[4px] backdrop-blur-none' : ''">
+    <div class="overflow-x-hidden relative" :class="uiStore.isMenuOpen ? 'blur-[4px] backdrop-blur-none' : ''">
+        <ToastMessage/>
         <NavMenu/>
         <RouterView/>
     </div>
 </template>
-

@@ -2,7 +2,7 @@
 
 import { RouterLink } from "vue-router";
 import NavMenuAvatar from "./NavMenuAvatar.vue";
-import { useUiStore } from '@/stores/ui';
+import { useUiStore } from '@/shared/stores/ui';
 
 const uiStore = useUiStore();
 
@@ -36,3 +36,4 @@ const uiStore = useUiStore();
         </div>
     </nav>
 </template>
+@/shared/stores/ui
