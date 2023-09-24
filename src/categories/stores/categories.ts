@@ -9,11 +9,12 @@ interface CategoriesStore {
     isLoading: Ref<boolean>;
     categories: Ref<ICategory[]>;
 
+    getAllCategories: () => Promise<void>
     deleteCategory: (id: string) => Promise<void>
     createNewCategory(image: any, category: {
         name: string;
         description: string;
-    }): Promise<void>
+    }): Promise<void>;
 } 
 
 export const useCategoriesStore = defineStore('categories', (): CategoriesStore => {
@@ -58,6 +59,7 @@ export const useCategoriesStore = defineStore('categories', (): CategoriesStore 
         categories,
 
         // METHOS
+        getAllCategories,
         deleteCategory,
         createNewCategory
     }

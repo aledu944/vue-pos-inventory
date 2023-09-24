@@ -5,7 +5,8 @@
 
 @layer base {
     body {
-        @apply bg-[#f0f2f3]
+        @apply bg-[#f0f2f3] min-h-screen
+        
     }
 
     h1 {

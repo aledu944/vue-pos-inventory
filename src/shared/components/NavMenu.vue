@@ -3,6 +3,7 @@
 import { RouterLink } from "vue-router";
 import NavMenuAvatar from "./NavMenuAvatar.vue";
 import { useUiStore } from '@/shared/stores/ui';
+import { NAV_MENU } from "../constants/nav-menu";
 
 const uiStore = useUiStore();
 
@@ -18,14 +19,9 @@ const uiStore = useUiStore();
                 Vue <span class="text-gradient">Inventory</span>
             </RouterLink>
             <ul class="hidden md:flex gap-4">
-                <li>
-                    <RouterLink class="nav__link" active-class="nav__link--active" :to="{ name:'products' }">
-                        Productos
-                    </RouterLink>
-                </li>
-                <li>
-                    <RouterLink class="nav__link" active-class="nav__link--active" :to="{ name:'orders' }">
-                        Ordenes
+                <li v-for="option in NAV_MENU" :key="option.pathName">
+                    <RouterLink class="nav__link" active-class="nav__link--active" :to="{ name: option.pathName }">
+                        {{ option.name }}
                     </RouterLink>
                 </li>
             </ul>
