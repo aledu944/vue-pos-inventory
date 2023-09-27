@@ -1,9 +1,12 @@
-import inventoryDb from "@/shared/api/inventoryDb";
-import { defineStore } from "pinia";
 import { onMounted, reactive, ref, type Ref } from "vue";
+import { defineStore } from "pinia";
+import router from "@/router";
+
+import { isAxiosError } from 'axios';
+import inventoryDb from "@/shared/api/inventoryDb";
 import type { ICategory } from "../interfaces/category";
 import categoryService from "../services/category.service";
-import router from "@/router";
+import { useToastStore } from '../../shared/stores/toast';
 
 interface CategoriesStore {
     isLoading: Ref<boolean>;
@@ -11,13 +14,12 @@ interface CategoriesStore {
 
     getAllCategories: () => Promise<void>
     deleteCategory: (id: string) => Promise<void>
-    createNewCategory(image: any, category: {
-        name: string;
-        description: string;
-    }): Promise<void>;
+    createNewCategory(image: any, category: { name: string; description: string }): Promise<void>;
 } 
 
 export const useCategoriesStore = defineStore('categories', (): CategoriesStore => {
+
+    const toastStore = useToastStore();
 
     const isLoading = ref(false);
     const categories = ref<ICategory[]>([]);
@@ -44,9 +46,17 @@ export const useCategoriesStore = defineStore('categories', (): CategoriesStore 
     }
 
     async function createNewCategory( image: any, category: { name:string, description: string } ){
-        const data = await categoryService.create(image, category);
-        getAllCategories();
-        router.back();
+        try {
+            await categoryService.create(image, category);
+            getAllCategories();
+            router.back();
+            toastStore.showToast('success', 'La categoria fue creada' ) 
+        } catch (error) {
+            if( isAxiosError(error) ){
+                const errorMessage = error.response?.data.message;
+                toastStore.showToast('error', Array.isArray(errorMessage) ? errorMessage[0] : errorMessage ) 
+            }
+        }
     }
 
 

@@ -5,8 +5,12 @@ import { useToastStore } from '../../shared/stores/toast';
 const toastStore = useToastStore();
 
 const remove = async (id: string): Promise<{ message: string }> => {
-    const { data } = await inventoryDb.delete<{ message: string }>(`/categories/${id}`);
-    return data;
+    try {
+        const { data } = await inventoryDb.delete<{ message: string }>(`/categories/${id}`);
+        return data;
+    } catch (error){
+        throw error;
+    }
 }
 
 const create = async ( image: any, category: { name:string, description: string }) => {
@@ -19,14 +23,9 @@ const create = async ( image: any, category: { name:string, description: string 
             ...category,
             image: imageUrl
         })
-
-        toastStore.showToast('success', "Categoria creada") 
         
     } catch (error) {
-        if( isAxiosError(error) ){
-            const errorMessage = error.response?.data.message;
-            toastStore.showToast('error', Array.isArray(errorMessage) ? errorMessage[0] : errorMessage ) 
-        }
+        throw error
     }
 
 }

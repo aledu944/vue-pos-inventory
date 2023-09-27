@@ -6,4 +6,6 @@ export interface ICategory {
     slug:        string;
     description: string;
     image:       string;
+    createdAt:   string;
+    updatedAt:   string;
 }

@@ -1,11 +1,16 @@
 import { reactive, ref } from 'vue';
 import { useToastStore } from '../../shared/stores/toast';
 import { useCategoriesStore } from '../stores/categories';
+import { storeToRefs } from 'pinia';
 
-export const useNewCategory = () => {
+export const useCategory = () => {
 
     const toastStore = useToastStore();
-    const categoryStore = useCategoriesStore();
+    const categoriesStore = useCategoriesStore();
+    const { isLoading, categories } = storeToRefs(categoriesStore);
+
+
+    const isOpen = ref(false)
 
     const image = ref();
     const preImage = ref('');
@@ -27,14 +32,27 @@ export const useNewCategory = () => {
             return;
         }
 
-        categoryStore.createNewCategory(image.value, newCategory)
+        categoriesStore.createNewCategory(image.value, newCategory)
+    }
+
+    function closeModal() {
+        isOpen.value = false
+    }
+    
+    function openModal() {
+        isOpen.value = true
     }
 
     return {
-        preImage,
+        categories,
+        isLoading,
+        isOpen,
         newCategory,
-
+        preImage,
+        
+        closeModal,
         handleFileChange,
-        handleSubmit
+        handleSubmit,
+        openModal,
     }
 }

@@ -1,7 +1,7 @@
 <script setup lang='ts'>
-import { useNewCategory } from "../composables/newCategory";
+import { useCategory } from '../composables/useCategory';
 
-const { handleFileChange, handleSubmit, newCategory, preImage } = useNewCategory();
+const { handleFileChange, handleSubmit, newCategory, preImage } = useCategory();
 
 </script>
 
@@ -46,4 +46,4 @@ const { handleFileChange, handleSubmit, newCategory, preImage } = useNewCategory
 
 <style>
 
-</style>
+</style>../composables/useCategory

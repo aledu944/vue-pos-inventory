@@ -1,23 +1,15 @@
 <script setup lang='ts'>
 
-import { ref } from 'vue';
+import { formatDate } from '../../shared/helpers/format-date';
+import { useCategory } from "../composables/useCategory";
+
 import ActionsMenu from './ActionsMenu.vue';
 import EditCategoryModal from "./EditCategoryModal.vue";
-import { useCategoriesStore } from '../stores/categories';
+import CircularProgress from "@/shared/components/CircularProgress.vue";
 
 
-const useCategories = useCategoriesStore();
+const { closeModal, isOpen, isLoading, openModal, categories } = useCategory();
 
-
-const isOpen = ref(false)
-
-function closeModal() {
-    isOpen.value = false
-}
-
-function openModal() {
-    isOpen.value = true
-}
 </script>
 
 <template>
@@ -25,18 +17,22 @@ function openModal() {
 
     <div class="overflow-x-scroll">
         <div class="bg-white py-8 px-6 rounded-md border border-gray-300 w-full min-w-[800px]">
-            <div class="grid grid-cols-5 gap-[2rem] mb-3">
+            <div class="grid grid-cols-7 gap-[2rem] mb-3">
                 <h4 class="font-bold">Codigo</h4>
                 <h4 class="font-bold">Imagen</h4>
                 <h4 class="font-bold">Nombre</h4>
                 <h4 class="font-bold">Descripcion</h4>
+                <h4 class="font-bold">Creación</h4>
+                <h4 class="font-bold">Ultima actualización</h4>
                 <h4 class="font-bold text-center">Acciones</h4>
             </div>
             <div class="border border-gray-100 mb-8"></div>
 
-            <div class="space-y-6">
-                <div v-for="category in useCategories.categories" :key="category.id"
-                    class="grid items-center grid-cols-5 text-sm gap-[2rem]">
+            <CircularProgress v-if="isLoading"/>
+            
+            <div v-else class="space-y-6">
+                <div v-for="category in categories" :key="category.id"
+                    class="grid items-center grid-cols-7 text-sm gap-[2rem] text-gray-500">
 
                     <p class="w-full text-gray-500 line-clamp-1">
                         #{{ category.id }}
@@ -44,14 +40,17 @@ function openModal() {
 
                     <img class="max-w-[70px]" :src="category.image" :alt="category.name" srcset="">
 
-                    <p class="text-gray-500">
+                    <p>
                         {{ category.name }}
                     </p>
-                    <p class="text-gray-500 line-clamp-2">
+                    <p class="line-clamp-2">
                         {{ category.description }}
                     </p>
 
-                    <ActionsMenu :id="category.id" :open-modal="openModal"/>
+                    <p>{{ formatDate( category.createdAt ) }}</p>
+                    <p>{{ formatDate( category.updatedAt ) }}</p>
+                    
+                    <ActionsMenu :id="category.id" :open-modal="openModal" />
                 </div>
             </div>
         </div>
