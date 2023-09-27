@@ -11,6 +11,7 @@ interface BrandsStore {
 
     getBrands: () => void;
     deleteBrand: (id: string) => Promise<void>;
+    createNewBrand(brand: { name: string }): Promise<void>
 }
 
 export const useBrandsStore = defineStore('brands', (): BrandsStore => {
@@ -34,6 +35,22 @@ export const useBrandsStore = defineStore('brands', (): BrandsStore => {
         }
     }
 
+    async function createNewBrand( brand: { name: string } ) {
+        isLoading.value = true;
+        try {
+            await brandsService.create(brand);
+            toastStore.showToast('success', 'Se creo la nueva marca')
+            getBrands();
+            isLoading.value = false;
+        } catch (error) {
+            if( isAxiosError(error) ){
+                toastStore.showToast('error', error.response?.data.message);
+            }
+        } finally {
+            isLoading.value = false;
+        }
+    }
+
     async function deleteBrand( id: string ){
         try {
             const message = await brandsService.remove(id);
@@ -54,7 +71,8 @@ export const useBrandsStore = defineStore('brands', (): BrandsStore => {
         brands,
 
         getBrands,
-        deleteBrand
+        deleteBrand,
+        createNewBrand
     }
 
 });
