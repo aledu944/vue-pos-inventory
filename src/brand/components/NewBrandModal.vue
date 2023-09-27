@@ -1,36 +1,10 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
-import { useBrandsStore } from '../store/brands';
-import {
-  TransitionRoot,
-  TransitionChild,
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-} from '@headlessui/vue'
 
-const brandsStore = useBrandsStore();
-const { createNewBrand } = useBrandsStore();
-
-const isOpen = ref(false)
-
-const brand = reactive({
-  name: ''
-})
+import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
+import { useBrands } from '../composables/useBrand';
 
 
-function closeModal() {
-  isOpen.value = false
-}
-function openModal() {
-  isOpen.value = true
-}
-
-const handleSubmit = () => {
-  createNewBrand( brand );
-  brand.name = '';
-  closeModal()
-}
+const { newBrand, openModal, closeModal, isOpen, handleCreateSubmit } = useBrands();
 
 </script>
 
@@ -66,7 +40,7 @@ const handleSubmit = () => {
                   class="border-2 border-gray-300"
                   type="text"
                   placeholder="Samsung, Lg, Mercado pago..."
-                  v-model="brand.name"
+                  v-model="newBrand.name"
                 >
               </div>
 
@@ -78,7 +52,7 @@ const handleSubmit = () => {
                 </button>
                 <button type="button"
                   class="btn-secondary"
-                  @click="handleSubmit">
+                  @click="handleCreateSubmit">
                   Guardar
                 </button>
               </div>

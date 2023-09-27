@@ -1,5 +1,5 @@
 import { storeToRefs } from 'pinia';
-import { ref, defineProps } from 'vue';
+import { ref, defineProps, reactive } from 'vue';
 import { useBrandsStore } from '../store/brands';
 
 export const useBrands = () => {
@@ -8,7 +8,10 @@ export const useBrands = () => {
     const { brand } = storeToRefs(brandsStore);
 
     const isOpen = ref(false)
-
+    const newBrand = reactive({
+        name: ''
+    })
+      
 
     function closeModal() {
         isOpen.value = false
@@ -16,6 +19,12 @@ export const useBrands = () => {
 
     function openModal() {
         isOpen.value = true
+    }
+    
+    const handleCreateSubmit = () => {
+        brandsStore.createNewBrand( newBrand );
+        newBrand.name = '';
+        closeModal()          
     }
 
     const handleEditSubmit = () => {
@@ -31,11 +40,13 @@ export const useBrands = () => {
     
     return {
         brand,
+        newBrand,
         isOpen,
 
         // METHODS
         closeModal,
         handleClick,
+        handleCreateSubmit,
         handleEditSubmit,
         openModal,
 
