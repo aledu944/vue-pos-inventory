@@ -4,6 +4,7 @@ import { defineProps } from 'vue';
 import { type IBrand } from '../interfaces/brands';
 import { formatDate } from '../../shared/helpers/format-date';
 import { useBrandsStore } from '../store/brands';
+import EditBrandModal from './EditBrandModal.vue';
 
 const { deleteBrand } = useBrandsStore();
 
@@ -20,9 +21,10 @@ defineProps<{
         <p>{{ formatDate(brand.createdAt) }}</p>
         <p>{{ formatDate(brand.updatedAt) }}</p>
         <div class="flex items-center justify-center gap-4">
-            <div class="bg-primary/30 rounded-full cursor-pointer max-w-max p-2 hover:scale-[1.025] active:saturate-100 transition-all">
+            <!-- <div class="bg-primary/30 rounded-full cursor-pointer max-w-max p-2 hover:scale-[1.025] active:saturate-100 transition-all">
                 <i class="flex text-primary uil uil-pen"></i>
-            </div>
+            </div> -->
+            <EditBrandModal :id="brand.id"/>
             <div @click="deleteBrand(brand.id)" class="bg-red-500/30 rounded-full cursor-pointer max-w-max p-2 hover:scale-[1.025] active:saturate-100 transition-all">
                 <i class="flex text-red-500 uil uil-trash"></i>
             </div>

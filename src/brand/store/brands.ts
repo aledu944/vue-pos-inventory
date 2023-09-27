@@ -7,8 +7,10 @@ import { isAxiosError } from 'axios';
 
 
 interface BrandsStore {
+    brand: Ref<IBrand>;
     brands: Ref<IBrand[]>;
 
+    getBrand: (id: string) => void;
     getBrands: () => void;
     deleteBrand: (id: string) => Promise<void>;
     createNewBrand(brand: { name: string }): Promise<void>
@@ -18,6 +20,7 @@ export const useBrandsStore = defineStore('brands', (): BrandsStore => {
 
     const toastStore = useToastStore();
 
+    const brand = ref<IBrand>({} as IBrand);
     const brands = ref<IBrand[]>([]);
     const isLoading = ref(false);
 
@@ -51,6 +54,10 @@ export const useBrandsStore = defineStore('brands', (): BrandsStore => {
         }
     }
 
+    async function getBrand(id:string) {
+        brand.value = brands.value.find((brand: IBrand ) => brand.id === id)!;
+    }
+
     async function deleteBrand( id: string ){
         try {
             const message = await brandsService.remove(id);
@@ -68,8 +75,10 @@ export const useBrandsStore = defineStore('brands', (): BrandsStore => {
     })
 
     return {
+        brand,
         brands,
 
+        getBrand,
         getBrands,
         deleteBrand,
         createNewBrand
