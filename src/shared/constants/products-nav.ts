@@ -34,5 +34,35 @@ export const ProductsNavOptions = [
                 icon: 'uil uil-plus',
             },
         ]
+    },
+    {
+        name: 'Marcas',
+        description: 'Control de marcas',
+        subOptions: [
+            {
+                path: 'brands',
+                name: 'Tus marcas',
+                description: 'Listado de marcas',
+                icon: 'uil uil-clipboard-notes',
+            }
+        ]
+    },
+    {
+        name: 'Provedores',
+        description: 'Provedores de tus productos',
+        subOptions: [
+            {
+                path: 'categories',
+                name: 'Categorias',
+                description: 'Categorias registradas',
+                icon: 'uil uil-clipboard-notes',
+            },
+            {
+                path: 'new-category',
+                name: 'Nueva categoria',
+                description: 'Crea un nueva categoria',
+                icon: 'uil uil-plus',
+            },
+        ]
     }
 ]

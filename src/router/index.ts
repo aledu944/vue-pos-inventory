@@ -49,6 +49,11 @@ const router = createRouter({
               name: 'new-category',
               component: () => import('../categories/views/NewCategoryView.vue'),
             },
+            {
+              path: '/brands',
+              name: 'brands',
+              component: () => import('../brand/views/BrandsView.vue'),
+            },
           ]
         },
         {

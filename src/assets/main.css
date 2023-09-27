@@ -4,10 +4,11 @@
 @tailwind utilities;
 
 @layer base {
-    body {
-        @apply bg-[#f0f2f3] min-h-screen
-        
+
+    body{
+        @apply bg-[#f0f2f3]
     }
+
 
     h1 {
         @apply text-3xl font-extrabold

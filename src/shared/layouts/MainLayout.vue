@@ -12,7 +12,7 @@ const uiStore = useUiStore();
 
 <template>
     <SideMenu/>
-    <div class="overflow-x-hidden relative" :class="uiStore.isMenuOpen ? 'blur-[4px] backdrop-blur-none' : ''">
+    <div class="overflow-x-hidden relative min-h-screen" :class="uiStore.isMenuOpen ? 'blur-[4px] backdrop-blur-none' : ''">
         <ToastMessage/>
         <NavMenu/>
         <RouterView/>
