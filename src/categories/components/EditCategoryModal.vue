@@ -1,7 +1,10 @@
 <script setup lang="ts">
+
 import { defineProps } from 'vue'
+
 import EditCategoryForm from "./EditCategoryForm.vue";
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
+
 
 defineProps<{
     isOpen: boolean,
@@ -29,14 +32,7 @@ defineProps<{
                                 Editar categoria
                             </DialogTitle>
                             <EditCategoryForm />
-                            <div class="mt-4 flex gap-2">
-                                <button class="btn-danger" @click="closeModal">
-                                    Cerrar modal
-                                </button>
-                                <button  type="submit" class="btn-secondary">
-                                    Actualizar
-                                </button>
-                            </div>
+                            
                         </DialogPanel>
                     </TransitionChild>
                 </div>

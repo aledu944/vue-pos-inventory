@@ -10,11 +10,14 @@ import { useToastStore } from '../../shared/stores/toast';
 
 interface CategoriesStore {
     isLoading: Ref<boolean>;
+    category: Ref<ICategory>;
     categories: Ref<ICategory[]>;
 
+    getCategory: (id: string) => Promise<void>
     getAllCategories: () => Promise<void>
     deleteCategory: (id: string) => Promise<void>
     createNewCategory(image: any, category: { name: string; description: string }): Promise<void>;
+    updateCategory(id: string, image: any, category: { name: string; description: string }): Promise<void>
 } 
 
 export const useCategoriesStore = defineStore('categories', (): CategoriesStore => {
@@ -22,6 +25,7 @@ export const useCategoriesStore = defineStore('categories', (): CategoriesStore 
     const toastStore = useToastStore();
 
     const isLoading = ref(false);
+    const category = ref<ICategory>({} as ICategory);
     const categories = ref<ICategory[]>([]);
 
     const getAllCategories = async () => {
@@ -59,6 +63,23 @@ export const useCategoriesStore = defineStore('categories', (): CategoriesStore 
         }
     }
 
+    async function updateCategory( id: string, image: any, category: { name:string, description: string } ){
+        try {
+            await categoryService.update(id, image, category);
+            getAllCategories();
+            toastStore.showToast('success', 'Se actualizo la categoria' )             
+        } catch (error) {
+            if( isAxiosError(error) ){
+                const errorMessage = error.response?.data.message;
+                toastStore.showToast('error', Array.isArray(errorMessage) ? errorMessage[0] : errorMessage ) 
+            }
+        }
+    }
+
+    async function getCategory(id:string) {
+        category.value = categories.value.find( cat => cat.id === id)!;
+    }
+
 
     onMounted(() => {
         getAllCategories();
@@ -66,12 +87,15 @@ export const useCategoriesStore = defineStore('categories', (): CategoriesStore 
 
     return {
         isLoading,
+        category,
         categories,
+        updateCategory,
 
         // METHOS
-        getAllCategories,
+        createNewCategory,
         deleteCategory,
-        createNewCategory
+        getAllCategories,
+        getCategory,
     }
     
 });

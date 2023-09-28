@@ -30,7 +30,37 @@ const create = async ( image: any, category: { name:string, description: string 
 
 }
 
+const update = async (id: string, image: any, category: { name:string, description: string } ) => {
+    console.log(image)
+    if( !image ){
+        try {
+            await inventoryDb.patch(`/categories/${ id }`, {
+                ...category,
+            })
+            return;
+            
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    const formData = new FormData();
+    formData.append('file', image);
+    
+    try {
+        const { data: imageUrl } = await inventoryDb.post('/files/uploads', formData);
+        await inventoryDb.patch(`/categories/${ id }`, {
+            ...category,
+            image: imageUrl
+        })
+        
+    } catch (error) {
+        throw error
+    }
+}
+
 export default {
     remove,
+    update,
     create
 }

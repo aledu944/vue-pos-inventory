@@ -1,9 +1,13 @@
 <script setup lang='ts'>
 
+import { useCategory } from '../composables/useCategory';
+
+const { category, handleFileChange, preImage, handleUpdate, closeModal } = useCategory();
+
 </script>
 
 <template>
-    <form class="space-y-6">
+    <form class="space-y-6" @submit.prevent="handleUpdate">
         <div>
             <label for="edit-category-name">Nombre:</label>
             <input         
@@ -11,6 +15,7 @@
                 id="edit-category-name" 
                 class="border-gray-300 border-2" 
                 placeholder="Auriculares, Computadoras, Herramientas..."
+                v-model="category.name"
             />
         </div>
         <div>
@@ -19,12 +24,30 @@
                 rows="3"
                 id="category-name" 
                 class="block border-gray-300 border-2" 
-                placeholder="Agrega una descripcion del producto..." 
+                placeholder="Agrega una descripcion..." 
+                v-model="category.description"
+
             ></textarea>
         </div>
+
         <div>
             <label for="category-image">Imagen del producto:</label>
-            <input id="category-image" type="file">
+            <input @change="handleFileChange" id="category-image" type="file">
         </div>
+        <div class="flex flex-col justify-center items-center">
+            <h2 class="">Imagen del producto</h2>
+            <p v-if="preImage === ''" class="text-lg md:text-xl text-gray-400">Aun no selecciono una imagen</p>
+            <img class="max-w-[100px]" :src="preImage"/>
+        </div>
+
+        <div class="mt-4 flex gap-2">
+            <button class="btn-danger" @click="closeModal">
+                Cerrar modal
+            </button>
+            <button type="submit" class="btn-secondary">
+                Actualizar
+            </button>
+        </div>
+
     </form>
 </template>

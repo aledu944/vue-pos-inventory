@@ -2,6 +2,8 @@
 import { defineProps } from 'vue';
 import { useCategoriesStore } from '../stores/categories';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+import { useCategory } from '../composables/useCategory';
+import EditCategoryModal from './EditCategoryModal.vue';
 
 defineProps<{
     id: string,
@@ -9,10 +11,13 @@ defineProps<{
 }>()
 
 const useCategories = useCategoriesStore();
+const { handleClickEdit, closeModal, isOpen } = useCategory();
 
 </script>
 
 <template>
+    <EditCategoryModal :close-modal="closeModal" :is-open="isOpen" />
+
     <Menu as="div" class="inline-block text-center">
         <MenuButton
             class="focus:outline-none text-xl mx-auto focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
@@ -28,7 +33,7 @@ const useCategories = useCategoriesStore();
                     <MenuItem v-slot="{ active }">
                     <button
                         :class="[active ? 'bg-primary text-white' : 'text-gray-900', 'group flex w-full items-center rounded-md px-2 py-2 text-sm']"
-                        class="flex gap-4" @click="openModal">
+                        class="flex gap-4" @click="handleClickEdit(id)">
 
                         <i class="uil uil-pen"></i>
                         Editar

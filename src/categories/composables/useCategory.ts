@@ -7,7 +7,7 @@ export const useCategory = () => {
 
     const toastStore = useToastStore();
     const categoriesStore = useCategoriesStore();
-    const { isLoading, categories } = storeToRefs(categoriesStore);
+    const { isLoading, categories, category } = storeToRefs(categoriesStore);
 
 
     const isOpen = ref(false)
@@ -35,6 +35,22 @@ export const useCategory = () => {
         categoriesStore.createNewCategory(image.value, newCategory)
     }
 
+    function handleUpdate() {
+        console.log(image)
+        if( Object.values(category).includes('') ){
+            toastStore.showToast('error',"Ingrese valores correctos")
+            return;
+        }
+        console.log(category.value.id)
+        categoriesStore.updateCategory(category.value.id, image.value, { name: category.value.name, description: category.value.description })
+        closeModal();
+    }
+
+    function handleClickEdit(id: string){
+        categoriesStore.getCategory(id)
+        openModal();
+    }
+
     function closeModal() {
         isOpen.value = false
     }
@@ -45,14 +61,17 @@ export const useCategory = () => {
 
     return {
         categories,
+        category,
         isLoading,
         isOpen,
         newCategory,
         preImage,
         
         closeModal,
+        handleClickEdit,
         handleFileChange,
         handleSubmit,
+        handleUpdate,
         openModal,
     }
 }

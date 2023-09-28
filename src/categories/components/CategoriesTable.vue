@@ -4,17 +4,14 @@ import { formatDate } from '../../shared/helpers/format-date';
 import { useCategory } from "../composables/useCategory";
 
 import ActionsMenu from './ActionsMenu.vue';
-import EditCategoryModal from "./EditCategoryModal.vue";
 import CircularProgress from "@/shared/components/CircularProgress.vue";
 
 
-const { closeModal, isOpen, isLoading, openModal, categories } = useCategory();
+const { isLoading, openModal, categories } = useCategory();
 
 </script>
 
 <template>
-    <EditCategoryModal :close-modal="closeModal" :is-open="isOpen" />
-
     <div class="overflow-x-scroll">
         <div class="bg-white py-8 px-6 rounded-md border border-gray-300 w-full min-w-[800px]">
             <div class="grid grid-cols-7 gap-[2rem] mb-3">
