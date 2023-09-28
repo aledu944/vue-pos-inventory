@@ -31,7 +31,7 @@ defineProps<{
                             <DialogTitle as="h3" class=" font-medium leading-6 text-gray-900 mb-4">
                                 Editar categoria
                             </DialogTitle>
-                            <EditCategoryForm />
+                            <EditCategoryForm :close-modal="closeModal"/>
                             
                         </DialogPanel>
                     </TransitionChild>

@@ -1,8 +1,11 @@
 <script setup lang='ts'>
-
+import { defineProps } from 'vue';
 import { useCategory } from '../composables/useCategory';
 
-const { category, handleFileChange, preImage, handleUpdate, closeModal } = useCategory();
+const {} = defineProps<{
+    closeModal: () => void
+}>()
+const { category, handleFileChange, preImage, handleUpdate } = useCategory();
 
 </script>
 
@@ -41,9 +44,9 @@ const { category, handleFileChange, preImage, handleUpdate, closeModal } = useCa
         </div>
 
         <div class="mt-4 flex gap-2">
-            <button class="btn-danger" @click="closeModal">
+            <div class="btn-danger" @click="closeModal">
                 Cerrar modal
-            </button>
+            </div>
             <button type="submit" class="btn-secondary">
                 Actualizar
             </button>
