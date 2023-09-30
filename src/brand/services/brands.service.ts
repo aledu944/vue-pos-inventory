@@ -14,6 +14,14 @@ async function create(brand: { name: string }) {
     }
 }
 
+async function update(id: string, name: string) {
+    try {
+        await inventoryDb.patch(`/brands/${id}`, { name });
+    } catch (error) {
+        throw error;
+    }
+}
+
 async function remove( id: string ): Promise<string | null> {
     try {
         const { data } = await inventoryDb.delete(`/brands/${id}`);
@@ -27,5 +35,6 @@ async function remove( id: string ): Promise<string | null> {
 export default {
     find,
     create,
-    remove
+    remove,
+    update
 }

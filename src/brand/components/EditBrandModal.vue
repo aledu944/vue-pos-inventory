@@ -41,7 +41,7 @@ const { brand, closeModal, handleClick, handleEditSubmit, isOpen } = useBrands()
                                 <button type="button" class="btn-danger" @click="closeModal">
                                     Cerrar modal
                                 </button>
-                                <button type="button" class="btn-secondary" @click="handleEditSubmit">
+                                <button type="button" class="btn-secondary" @click="handleEditSubmit(id, brand.name )">
                                     Guardar
                                 </button>
                             </div>
