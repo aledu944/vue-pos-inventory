@@ -47,7 +47,7 @@ const { category, handleFileChange, preImage, handleUpdate } = useCategory();
             <div class="btn-danger" @click="closeModal">
                 Cerrar modal
             </div>
-            <button type="submit" class="btn-secondary">
+            <button @click="handleUpdate" type="submit" class="btn-secondary">
                 Actualizar
             </button>
         </div>
