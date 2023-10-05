@@ -62,6 +62,14 @@
         hover:scale-[1.025] active:scale-100 text-center cursor-pointer
     }
 
+    .budget-success {
+        @apply bg-green-200 text-green-600 p-1 px-3 text-xs rounded-full text-center max-w-max
+    }
+
+    .budget-danger {
+        @apply bg-red-200 text-red-600 p-1 px-3 text-xs rounded-full text-center max-w-max
+    }
+
     .navbar {
         @apply bg-secondary flex  
     }
