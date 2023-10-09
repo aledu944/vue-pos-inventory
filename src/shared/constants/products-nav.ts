@@ -52,15 +52,15 @@ export const ProductsNavOptions = [
         description: 'Provedores de tus productos',
         subOptions: [
             {
-                path: 'categories',
-                name: 'Categorias',
-                description: 'Categorias registradas',
+                path: 'providers',
+                name: 'Proveedores',
+                description: 'Gestiona tus proveedores de tus productos',
                 icon: 'uil uil-clipboard-notes',
             },
             {
                 path: 'new-category',
-                name: 'Nueva categoria',
-                description: 'Crea un nueva categoria',
+                name: 'Nuevo proveedor',
+                description: 'Crea nuevos proveedores de tus productos',
                 icon: 'uil uil-plus',
             },
         ]
