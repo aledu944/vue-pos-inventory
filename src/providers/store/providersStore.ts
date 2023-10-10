@@ -10,6 +10,13 @@ import providersService from '../services/providers.service';
 interface ProvidersStore {
     isLoading: Ref<boolean>,
     providers: Ref<IProvider[]>
+
+    createNewProvider(provider: {
+        name: string;
+        email: string;
+        phone: string;
+        direction: string;
+    }): Promise<void>
 }
 
 export const useProvidersStore = defineStore('providers', (): ProvidersStore => {
@@ -34,6 +41,22 @@ export const useProvidersStore = defineStore('providers', (): ProvidersStore => 
         }
     }
 
+    async function createNewProvider(provider: { name: string, email: string, phone: string, direction: string}){
+        isLoading.value = true;
+        try {
+            const message = await providersService.create(provider);
+            getProviders();
+            toastStore.showToast('success', message)
+        } catch (error) {
+            if( isAxiosError(error) ){
+                const errorMessage = error.response?.data.message;
+                toastStore.showToast('error', Array.isArray(errorMessage) ? errorMessage[0] : errorMessage ) 
+            }
+        } finally {
+            isLoading.value = false;
+        }
+    }
+
     onMounted( async () => {
         getProviders();
     })
@@ -41,6 +64,8 @@ export const useProvidersStore = defineStore('providers', (): ProvidersStore => 
     return {
         isLoading,
         providers,
+
+        createNewProvider,
     }
 
 });

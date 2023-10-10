@@ -25,7 +25,7 @@ const toastColor = computed( () => type.value === 'error' ? '#DC2626' : '#17b39c
         font-weight: 600;
         position:absolute;
         width: max-content;
-        z-index: 4;
+        z-index: 100;
         top:1rem;
         text-align: center; 
         transition: all .5s ease-in-out;

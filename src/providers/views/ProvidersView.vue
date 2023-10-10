@@ -1,4 +1,5 @@
 <script setup lang='ts'>
+import NewProviderModal from '../components/NewProviderModal.vue';
 import ProvidersTable from '../components/ProvidersTable.vue';
 
 
@@ -7,7 +8,10 @@ import ProvidersTable from '../components/ProvidersTable.vue';
 <template>
     
     <main class="container pt-[2rem]">
-        <h1 class="mb-6">Gestiona tus proveedores</h1>
+        <div class="flex items-center justify-between mb-6">
+            <h1>Gestiona tus proveedores</h1>
+            <NewProviderModal/>
+        </div>
         <ProvidersTable/>
     </main>
 </template>
