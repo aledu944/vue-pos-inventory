@@ -54,7 +54,7 @@ const { isLoading, providers } = storeToRefs( providersStore );
                     <p>{{ formatDate( provider.createdAt ) }}</p>
                     <p>{{ formatDate( provider.updatedAt ) }}</p>
                     
-                    <ActionButton/>
+                    <ActionButton :id="provider.id"/>
                 </div>
             </div>
         </div>

@@ -11,12 +11,8 @@ interface ProvidersStore {
     isLoading: Ref<boolean>,
     providers: Ref<IProvider[]>
 
-    createNewProvider(provider: {
-        name: string;
-        email: string;
-        phone: string;
-        direction: string;
-    }): Promise<void>
+    deleteProviderById(id: string): Promise<void>;
+    createNewProvider(provider: { name: string; email: string; phone: string; direction: string }): Promise<void>;
 }
 
 export const useProvidersStore = defineStore('providers', (): ProvidersStore => {
@@ -57,6 +53,32 @@ export const useProvidersStore = defineStore('providers', (): ProvidersStore => 
         }
     }
 
+    async function deleteProviderById(id:string) {
+        try {
+            const message = await providersService.remove( id );
+            getProviders();
+            toastStore.showToast('success', message)
+        } catch (error) {
+            if( isAxiosError(error) ){
+                const errorMessage = error.response?.data.message;
+                toastStore.showToast('error', Array.isArray(errorMessage) ? errorMessage[0] : errorMessage ) 
+            }
+        }
+    }
+    
+    async function changeStatusProvider( id: string ){
+        try {
+            const message = await providersService.remove( id );
+            getProviders();
+            toastStore.showToast('success', message)
+        } catch (error) {
+            if( isAxiosError(error) ){
+                const errorMessage = error.response?.data.message;
+                toastStore.showToast('error', Array.isArray(errorMessage) ? errorMessage[0] : errorMessage ) 
+            }
+        }
+    }
+
     onMounted( async () => {
         getProviders();
     })
@@ -66,6 +88,7 @@ export const useProvidersStore = defineStore('providers', (): ProvidersStore => 
         providers,
 
         createNewProvider,
+        deleteProviderById
     }
 
 });

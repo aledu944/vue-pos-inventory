@@ -1,6 +1,11 @@
 <script setup lang='ts'>
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+import { useProvidersStore } from '../store/providersStore';
 
+const { deleteProviderById } = useProvidersStore();
+defineProps<{
+    id: string,
+}>();
 </script>
 
 <template>
@@ -25,7 +30,7 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
                     </button>
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
-                    <button
+                    <button @click="deleteProviderById(id)"
                         :class="[active ? 'bg-red-500 text-white' : 'text-gray-900', 'group flex w-full items-center rounded-md px-2 py-2 text-sm']"
                         class="flex gap-4">
                         <i class="uil uil-trash"></i>

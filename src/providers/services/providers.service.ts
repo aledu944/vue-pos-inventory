@@ -21,8 +21,21 @@ async function create(provider: { name: string, email: string, phone: string, di
     }
 }
 
+async function remove(id:string): Promise<string> {
+    try {
+        const { data }= await inventoryDb.delete(`/providers/${id}`)
+        console.log(data);
+        return data.message;
+    } catch (error) {
+        throw error;
+        
+    }
+}
+
+
 
 export default {
     find,
-    create
+    create,
+    remove
 }
