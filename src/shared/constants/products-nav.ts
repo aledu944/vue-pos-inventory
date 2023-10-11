@@ -57,12 +57,6 @@ export const ProductsNavOptions = [
                 description: 'Gestiona tus proveedores de tus productos',
                 icon: 'uil uil-clipboard-notes',
             },
-            {
-                path: 'new-provider',
-                name: 'Nuevo proveedor',
-                description: 'Crea nuevos proveedores de tus productos',
-                icon: 'uil uil-plus',
-            },
         ]
     }
 ]

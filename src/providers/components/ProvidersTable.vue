@@ -47,7 +47,7 @@ const { isLoading, providers } = storeToRefs( providersStore );
                         {{ provider.phone ? provider.phone : 'No tiene numero' }}
                     </p>
 
-                    <div :class="provider.status ? 'budget-success' : 'budget-danger'">
+                    <div @click="providersStore.changeStatusProvider(provider)" :class="provider.status ? 'budget-success' : 'budget-danger'" class="cursor-pointer">
                         {{ provider.status ? 'Activo' : 'Inactivo' }}
                     </div>
 

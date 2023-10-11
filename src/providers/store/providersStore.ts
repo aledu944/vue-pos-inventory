@@ -12,6 +12,7 @@ interface ProvidersStore {
     providers: Ref<IProvider[]>
 
     deleteProviderById(id: string): Promise<void>;
+    changeStatusProvider(provider: IProvider): Promise<void>;
     createNewProvider(provider: { name: string; email: string; phone: string; direction: string }): Promise<void>;
 }
 
@@ -29,9 +30,7 @@ export const useProvidersStore = defineStore('providers', (): ProvidersStore => 
             providers.value = data;
 
         } catch (error) {
-            if( isAxiosError(error) ){
-                toastStore.showToast('error', error.response?.data.message);
-            }
+            handleError(error);
         } finally {
             isLoading.value = false;
         }
@@ -44,10 +43,7 @@ export const useProvidersStore = defineStore('providers', (): ProvidersStore => 
             getProviders();
             toastStore.showToast('success', message)
         } catch (error) {
-            if( isAxiosError(error) ){
-                const errorMessage = error.response?.data.message;
-                toastStore.showToast('error', Array.isArray(errorMessage) ? errorMessage[0] : errorMessage ) 
-            }
+            handleError(error);
         } finally {
             isLoading.value = false;
         }
@@ -59,23 +55,25 @@ export const useProvidersStore = defineStore('providers', (): ProvidersStore => 
             getProviders();
             toastStore.showToast('success', message)
         } catch (error) {
-            if( isAxiosError(error) ){
-                const errorMessage = error.response?.data.message;
-                toastStore.showToast('error', Array.isArray(errorMessage) ? errorMessage[0] : errorMessage ) 
-            }
+            handleError(error);
         }
     }
     
-    async function changeStatusProvider( id: string ){
+    async function changeStatusProvider( provider: IProvider ){
         try {
-            const message = await providersService.remove( id );
+            const message = await providersService.changeStatus( provider );
             getProviders();
             toastStore.showToast('success', message)
         } catch (error) {
-            if( isAxiosError(error) ){
-                const errorMessage = error.response?.data.message;
-                toastStore.showToast('error', Array.isArray(errorMessage) ? errorMessage[0] : errorMessage ) 
-            }
+            handleError(error);
+        }
+    }
+
+
+    async function handleError(error:unknown) {
+        if( isAxiosError(error) ){
+            const errorMessage = error.response?.data.message;
+            toastStore.showToast('error', Array.isArray(errorMessage) ? errorMessage[0] : errorMessage ) 
         }
     }
 
@@ -88,7 +86,8 @@ export const useProvidersStore = defineStore('providers', (): ProvidersStore => 
         providers,
 
         createNewProvider,
-        deleteProviderById
+        deleteProviderById,
+        changeStatusProvider
     }
 
 });

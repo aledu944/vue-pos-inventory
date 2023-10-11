@@ -24,7 +24,6 @@ async function create(provider: { name: string, email: string, phone: string, di
 async function remove(id:string): Promise<string> {
     try {
         const { data }= await inventoryDb.delete(`/providers/${id}`)
-        console.log(data);
         return data.message;
     } catch (error) {
         throw error;
@@ -32,10 +31,19 @@ async function remove(id:string): Promise<string> {
     }
 }
 
-
+async function changeStatus(provider:IProvider) {
+    try {
+        const data = await inventoryDb.patch(`/providers/${provider.id}`, { status: !provider.status })
+        return 'Se cambio es estado'
+        
+    } catch (error) {
+        throw error;
+    }
+}
 
 export default {
     find,
     create,
-    remove
+    remove,
+    changeStatus
 }
