@@ -4,9 +4,9 @@ import { reactive } from 'vue';
 import { useProvidersStore } from '../store/providersStore';
 const { createNewProvider } = useProvidersStore();
 
-const props = defineProps<{
-    closeModal(): void
-}>();
+const emits = defineEmits<{
+    ( event: 'closeModal'): void 
+}>()
 
 const newProvider = reactive({
     name: '',
@@ -17,7 +17,7 @@ const newProvider = reactive({
 
 const handleSubmit = () => {
     createNewProvider(newProvider)
-    props.closeModal();
+    emits('closeModal');
 }
 
 </script>
@@ -44,7 +44,7 @@ const handleSubmit = () => {
             <input placeholder="Av. Callle #2" type="text" v-model="newProvider.direction">
         </div>
         <div class="flex gap-4">
-            <button @click="closeModal" class="btn-danger max-w-max">Cancelar</button>
+            <div @click="emits('closeModal')"  class="btn-danger max-w-max">Cancelar</div>
             <button type="submit" class="btn-secondary max-w-max">Guardar</button>
         </div>
     </form>

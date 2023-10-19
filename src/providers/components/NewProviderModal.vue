@@ -10,6 +10,7 @@ const isOpen = ref(false)
 function closeModal() {
     isOpen.value = false
 }
+
 function openModal() {
     isOpen.value = true
 }
@@ -41,7 +42,7 @@ function openModal() {
                             </DialogTitle>
 
 
-                            <NewProviderForm :closeModal="closeModal"/>
+                            <NewProviderForm @close-modal="closeModal"/>
 
                         </DialogPanel>
                     </TransitionChild>
