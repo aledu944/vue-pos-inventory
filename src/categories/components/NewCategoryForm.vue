@@ -46,4 +46,4 @@ const { handleFileChange, handleSubmit, newCategory, preImage } = useCategory();
 
 <style>
 
-</style>../composables/useCategory
+</style>

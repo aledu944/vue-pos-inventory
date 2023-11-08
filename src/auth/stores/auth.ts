@@ -37,10 +37,17 @@ export const useAuthStore = defineStore('auth', () => {
 
         isLoading.value = false;
         router.push('/products');
+    }
 
+    async function logout() {
+        localStorage.removeItem('AUTH_INVENTORY_TOKEN');
+        localStorage.removeItem('AUTH_INVENTORY_USER');
+        toastStore.showToast('success', "Sesion cerrada")
+        router.push('/auth/login');
     }
 
     return {
         loginWithCredentials,
+        logout
     }
 })

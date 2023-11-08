@@ -29,9 +29,9 @@ export const UsersNavOptions = [
                 
             },
             {
-                path: 'new-category',
+                path: 'new-user',
                 name: 'Agregar usuario',
-                description: 'Crea un nueva categoria',
+                description: 'Agrega usuarios al sistema',
                 icon: 'uil uil-plus',
             },
         ]

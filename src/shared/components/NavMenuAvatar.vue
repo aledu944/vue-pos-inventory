@@ -1,7 +1,9 @@
-
 <script setup lang="ts">
-    import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-    
+import { useAuthStore } from '../../auth/stores/auth';
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+
+const authStore = useAuthStore();
+
 </script>
   
 
@@ -44,13 +46,14 @@
 
               <MenuItem v-slot="{ active }">
                 <button
+                  @click="authStore.logout"
                   :class="[
                     active && 'bg-red-500',
                     'group flex gap-2 w-full items-center rounded-md px-2 py-2',
                   ]"
                 >
-                  <i class="uil uil-trash"></i>
-                  Perfil
+                <i class="uil uil-signin"></i>
+                  Cerrar Sesion
                 </button>
               </MenuItem>
             </div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import inventoryDb from "@/shared/api/inventoryDb"
 import { useToastStore } from "@/shared/stores/toast";
-import type { ILoginResponse } from "../interfaces";
+import type { ILoginResponse, IRolesResponse } from "../interfaces";
 
 
 async function login(email: string, password: string) {
@@ -40,7 +40,28 @@ async function validate(token: string) {
     }
 }
 
+async function getAllRoles( token: string ) {
+    const toastStore = useToastStore();
+
+    try {
+        const { data } = await inventoryDb.get<IRolesResponse[]>('/roles', {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                Accept: 'application/json'
+            }
+        });
+        return data;
+
+    } catch (error) {
+        console.log(error);
+        if (axios.isAxiosError(error)) {
+            toastStore.showToast('error', error.response?.data.message ? 'No esta autenticado' : error.response?.data.message)
+        }
+    }
+}
+
 export default {
     login,
-    validate
+    validate,
+    getAllRoles
 }

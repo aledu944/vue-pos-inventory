@@ -26,6 +26,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'dashboard',
+      redirect: 'products',
       component: () => MainLayout,
       meta: { requiresAuth: true },
       children: [
@@ -67,16 +68,21 @@ const router = createRouter({
           ]
         },
         {
-          path: 'users',
-          name: 'users',
-          component: UsersLayout,
+          path: '/users',
+          redirect: 'users',
+          component: () => UsersLayout,
           meta: { requiresRoleAdmin: true },
           children: [
-            {
-              path: '/users',
-              name: 'users',
-              component: () => import('@/users/views/UsersView.vue'),
-            }
+              {
+                path: '/users',
+                name: 'users',
+                component: () => import('@/users/views/UsersView.vue'),
+              },
+              {
+                path: '/users/new',
+                name: 'new-user',
+                component: () => import('@/users/views/NewUserView.vue'),
+              },
           ]
         },
         {
