@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import authService from '@/auth/services/auth.service';
+import { useToastStore } from '@/shared/stores/toast';
+
 import AuthLayout from "../auth/layouts/AuthLayout.vue";
 import MainLayout from "../shared/layouts/MainLayout.vue";
-import ProductsLayout from "@/products/layouts/ProductsLayout.vue";
 import UsersLayout from '@/users/layouts/UsersLayout.vue';
-import authService from '@/auth/services/auth.service';
-import type { IUser } from '@/auth/interfaces';
-import { useToastStore } from '@/shared/stores/toast';
+import ProductsLayout from "@/products/layouts/ProductsLayout.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -75,7 +75,7 @@ const router = createRouter({
             {
               path: '/users',
               name: 'users',
-              component: () => import('../users/views/UsersView.vue'),
+              component: () => import('@/users/views/UsersView.vue'),
             }
           ]
         },
@@ -96,15 +96,13 @@ router.beforeEach(async (to, form, next) => {
   const requiresRoleAdmin = to.matched.some(url => url.meta.requiresRoleAdmin);
   const toastStore = useToastStore();
 
-
   if (requiresAuth) {
+
     const token = localStorage.getItem('AUTH_INVENTORY_TOKEN');
 
     if (!token)
       next({ path: '/auth/login' })
 
-
-    // VALIDAR EL TOKEN
     const data = await authService.validate(token!);
 
     if (!data?.user) {
@@ -115,14 +113,20 @@ router.beforeEach(async (to, form, next) => {
     localStorage.setItem('AUTH_INVENTORY_TOKEN', data.token);
     localStorage.setItem('AUTH_INVENTORY_USER', JSON.stringify(data.user));
 
+    if (requiresRoleAdmin && data.user.role !== "admin") {
+
+      toastStore.showToast('error', 'No tiene acceso a la ruta')
+      next({ path: '/products' })
+      return;
+
+    }
+
     next();
     return;
-
   }
 
   next();
   return;
-
 
 })
 

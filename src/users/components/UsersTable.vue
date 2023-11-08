@@ -3,8 +3,8 @@
 </script>
 
 <template>
-        <div class="overflow-x-scroll">
-        <div class="bg-white py-8 px-6 rounded-md border border-gray-300 w-full min-w-[800px]">
+        <!-- <div class="overflow-x-scroll"> -->
+        <!-- <div class="bg-white py-8 px-6 rounded-md border border-gray-300 w-full min-w-[800px]">
             <div class="grid grid-cols-8 gap-[2rem] mb-3">
                 <h4 class="font-bold">Codigo</h4>
                 <h4 class="font-bold">Nombres</h4>
@@ -15,7 +15,7 @@
                 <h4 class="font-bold">Ultima actualización</h4>
                 <h4 class="font-bold text-center">Acciones</h4>
             </div>
-            <div class="border border-gray-100 mb-8"></div>
+            <div class="border border-gray-100 mb-8"></div> -->
 
             <!-- <CircularProgress v-if="isLoading"/> -->
             
@@ -48,6 +48,6 @@
                     <ActionButton :id="provider.id"/>
                 </div>
             </div> -->
-        </div>
-    </div>
+        <!-- </div> -->
+    <!-- </div> -->
 </template>

@@ -15,7 +15,7 @@ defineProps<{
 </script>
 
 <template>
-    <div class="grid grid-cols-5 items-center justify-center text-gray-500 mb-6">
+    <div class="grid grid-cols-5 items-center justify-center text-gray-500">
         <p class="line-clamp-1">#{{ brand.id }}</p>
         <p>{{brand.name }}</p>
         <p>{{ formatDate(brand.createdAt) }}</p>

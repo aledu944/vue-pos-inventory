@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia';
 import ActionButton from './ActionButton.vue';
 import { useProvidersStore } from '../store/providersStore';
 import { formatDate } from '../../shared/helpers/format-date';
+import CircularProgress from '@/shared/components/CircularProgress.vue';
 
 
 const providersStore = useProvidersStore()
