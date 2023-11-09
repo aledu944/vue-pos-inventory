@@ -7,12 +7,13 @@ import type { IProductsResponse } from '../interfaces/products-response';
 
 interface ProductsStore {
     products: Ref<IProductsResponse[]>;
-    createNewProduct: (image: any, product: {
+    createNewProduct(image: any, product: {
         name: string;
         description: string;
         categoryId: string;
         price: number;
-    }) => Promise<void>
+        stock: number;
+    }): Promise<void>
 }
 
 export const useProductsStore = defineStore('products', (): ProductsStore => {
@@ -31,7 +32,8 @@ export const useProductsStore = defineStore('products', (): ProductsStore => {
         }
     }
 
-    async function createNewProduct(image: any, product: { name: string, description: string, categoryId: string, price: number  }) {
+    async function createNewProduct(image: any, product: { name: string, description: string, categoryId: string, price: number, stock: number  }) {
+        
         await productService.create(image, product);
         getProducts();
         router.back();

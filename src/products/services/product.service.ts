@@ -18,7 +18,7 @@ async function find(): Promise<IProductsResponse[]> {
 
 }
 
-async function create(image: any, product: { name: string, description: string, categoryId: string, price: number }) {
+async function create(image: any, product: { name: string, description: string, categoryId: string, price: number, stock: number }) {
     const formData = new FormData();
     formData.append('file', image);
 

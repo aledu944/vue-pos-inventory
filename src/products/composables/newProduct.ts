@@ -20,6 +20,7 @@ export const useNewProduct = () => {
         categoryId: "",
         brandId: "",
         providerId: "",
+        stock: 0,
     })
 
 
