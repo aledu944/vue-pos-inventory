@@ -18,6 +18,8 @@ export const useNewProduct = () => {
         description: "",
         price: 0,
         categoryId: "",
+        brandId: "",
+        providerId: "",
     })
 
 

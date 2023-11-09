@@ -1,7 +1,8 @@
 <script setup lang='ts'>
   import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+import { useProductsStore } from '../store/products';
 
-
+const productsStore = useProductsStore();
 </script>
 
 <template>
@@ -18,14 +19,15 @@
                 <h4 class="font-bold">Acciones</h4>
             </div>
             <div class="border border-gray-100 mb-8"></div>
-            <div class="grid items-center grid-cols-9 text-sm gap-[2rem]">
-                <p class="w-full text-gray-500">#123321</p>
-                <p class="min-w-min w-full text-gray-500">Imagen</p>
-                <p class="text-gray-500">Iphone 14 Pro Max</p>
-                <p class="col-span-2 text-gray-500 line-clamp-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore nesciunt nisi delectus est autem quia, officiis magni quo. Quos, natus! Enim ea inventore impedit aspernatur. Nostrum tenetur inventore corrupti vitae?</p>
-                <p class="text-gray-500">Telefonos celulares</p>
-                <p class="text-gray-500">55 u.</p>
-                <p class="text-gray-500">1200.00 USD</p>
+            <div v-for="product in productsStore.products" :key="product.id" class="grid items-center grid-cols-9 text-sm gap-[2rem]">
+                <p class="w-full text-gray-500 line-clamp-1">#{{ product.id }}</p>
+                <img class="max-w-[70px]" :src="product.image" :alt="product.name">
+
+                <p class="text-gray-500">{{ product.name }}</p>
+                <p class="col-span-2 text-gray-500 line-clamp-2">{{ product.description }}</p>
+                <p class="text-gray-500">{{ product.category.name }}</p>
+                <p class="text-gray-500">{{ product.stock }}</p>
+                <p class="text-gray-500">{{ product.price }} BOB</p>
                 
                 <Menu as="div" class="inline-block text-left">
                     <MenuButton class="focus:outline-none text-xl focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">

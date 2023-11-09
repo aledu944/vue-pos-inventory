@@ -3,12 +3,22 @@
 import { onMounted } from 'vue';
 import { useNewProduct } from '../composables/newProduct';
 import { useCategoriesStore } from '../../categories/stores/categories';
+import { useBrandsStore } from '../../brand/store/brands';
+import { useProvidersStore } from '../../providers/store/providersStore';
 const { handleFileChange, handleSubmit, newProduct, preImage } = useNewProduct();
 
 const categoriesStore = useCategoriesStore()
+const brandStore = useBrandsStore();
+const providerStore = useProvidersStore();
+
+const fetchData = [
+    categoriesStore.getAllCategories(),
+    brandStore.getBrands(),
+    providerStore.getProviders(),
+]
 
 onMounted(() => {
-    categoriesStore.getAllCategories();
+    Promise.all(fetchData);
 })
 
 </script>
@@ -54,6 +64,28 @@ onMounted(() => {
                     </option>
                 </select>
             </div>
+
+            <div>
+                <label for="">Selecciona la una marca: </label>
+                <select v-model="newProduct.brandId" class="border-2 border-gray-300 rounded-md px-3 py-2 w-full focus:border-primary outline-none" id="">
+                    <option disabled value="">Seleccione una marca</option>
+                    <option v-for="brand in brandStore.brands" :key="brand.id" :value="brand.id">
+                    {{ brand.name }}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label for="">Selecciona la categoria: </label>
+                <select v-model="newProduct.providerId" class="border-2 border-gray-300 rounded-md px-3 py-2 w-full focus:border-primary outline-none" id="">
+                    <option disabled value="">Seleccione una categoria</option>
+                    <option v-for="provider in providerStore.providers" :key="provider.id" :value="provider.id">
+                    {{ provider.name }}
+                    </option>
+                </select>
+            </div>
+
+
             <button type="submit" class="btn-primary">Crear producto</button>
         </form>
     </div>

@@ -1,4 +1,4 @@
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import router from '@/router';
 import productService from '../services/product.service';
@@ -6,6 +6,7 @@ import type { IProductsResponse } from '../interfaces/products-response';
 
 
 interface ProductsStore {
+    products: Ref<IProductsResponse[]>;
     createNewProduct: (image: any, product: {
         name: string;
         description: string;
@@ -41,6 +42,7 @@ export const useProductsStore = defineStore('products', (): ProductsStore => {
     })
 
     return {
+        products,
         createNewProduct,
     }
 

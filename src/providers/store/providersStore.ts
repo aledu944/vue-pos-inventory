@@ -8,9 +8,10 @@ import providersService from '../services/providers.service';
 
 
 interface ProvidersStore {
-    isLoading: Ref<boolean>,
-    providers: Ref<IProvider[]>
-
+    isLoading: Ref<boolean>;
+    providers: Ref<IProvider[]>;
+    
+    getProviders(): Promise<void>;
     deleteProviderById(id: string): Promise<void>;
     changeStatusProvider(provider: IProvider): Promise<void>;
     createNewProvider(provider: { name: string; email: string; phone: string; direction: string }): Promise<void>;
@@ -84,7 +85,7 @@ export const useProvidersStore = defineStore('providers', (): ProvidersStore => 
     return {
         isLoading,
         providers,
-
+        getProviders,
         createNewProvider,
         deleteProviderById,
         changeStatusProvider
