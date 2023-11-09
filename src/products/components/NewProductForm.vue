@@ -60,7 +60,7 @@ onMounted(() => {
                 <input min="0" class="border-gray-300 border-2 " v-model="newProduct.price" id="prooduct-price" type="number">
             </div>
             <div>
-                <label for="">Selecciona el proveedor: </label>
+                <label for="">Selecciona la categoria: </label>
                 <select v-model="newProduct.categoryId" class="border-2 border-gray-300 rounded-md px-3 py-2 w-full focus:border-primary outline-none" id="">
                     <option disabled value="">Seleccione una categoria</option>
                     <option v-for="category in categoriesStore.categories" :key="category.id" :value="category.id">
@@ -80,9 +80,9 @@ onMounted(() => {
             </div>
 
             <div>
-                <label for="">Selecciona la categoria: </label>
+                <label for="">Selecciona el proveedor: </label>
                 <select v-model="newProduct.providerId" class="border-2 border-gray-300 rounded-md px-3 py-2 w-full focus:border-primary outline-none" id="">
-                    <option disabled value="">Seleccione una categoria</option>
+                    <option disabled value="">Seleccione un proveedor</option>
                     <option v-for="provider in providerStore.providers" :key="provider.id" :value="provider.id">
                     {{ provider.name }}
                     </option>

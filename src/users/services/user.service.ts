@@ -1,5 +1,6 @@
 
 import inventoryDb from '@/shared/api/inventoryDb';
+import type { IUsersResponse } from '../interfaces';
 
 async function create(user: { email: string, password: string, roleId: string, name: string, lastname: string }, token: string) {
 
@@ -17,7 +18,21 @@ async function create(user: { email: string, password: string, roleId: string, n
     }
 }
 
+async function findMany(token:string) {
+    try {
+        const { data } = await inventoryDb.get<IUsersResponse[]>('/auth/users', {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                Accept: 'application/json'
+            }
+        })
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
 
 export default {
     create,
+    findMany,
 }

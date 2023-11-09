@@ -5,7 +5,7 @@ import UsersTable from "../components/UsersTable.vue";
 <template>
     <main class="container pt-[2rem]">
         <h2>Gestiona los usuarios del sistema</h2>
-        <!-- <UsersTable/> -->
+        <UsersTable/>
     </main>
 </template>
 
