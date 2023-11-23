@@ -1,7 +1,17 @@
 <script setup lang='ts'>
+import OrdersTable from "@/orders/components/OrdersTable.vue";
+
 
 </script>
 
 <template>
-    <h1>Listado de ordenes</h1>
+    <main class="container pt-[2rem]">
+        <section class="mb-6">
+            <h1>Gestion de ventas</h1>
+            <p>Controla tus ventas</p>
+        </section>
+
+        <OrdersTable/>
+
+    </main>
 </template>

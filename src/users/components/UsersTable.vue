@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { useUsersStore } from '../store/users';
-import { formatDate } from '../../shared/helpers/format-date';
 import type { IUser } from '../../auth/interfaces/user';
+import { useUsersStore } from '../store/users';
+
+import UsersTableActions from './UsersTableActions.vue';
+import { formatDate } from '../../shared/helpers/format-date';
 
 const usersStore = useUsersStore()
 const session: IUser = JSON.parse(localStorage.getItem('AUTH_INVENTORY_USER')!);
 
-
-console.log(session)
 </script>
 
 <template>
@@ -51,7 +51,7 @@ console.log(session)
 
                     <p>{{ formatDate(user.createdAt) }}</p>
 
-                    <ActionButton :id="user.id" />
+                    <UsersTableActions/>
                 </div>
             </div>
         </div>
