@@ -7,7 +7,7 @@ import ToastMessage from '@/shared/components/ToastMessage.vue';
 </script>
 
 <template>
-    <main class="min-h-screen grid grid-cols-2 relative overflow-hidden">
+    <main class="min-h-screen grid md:grid-cols-2 relative overflow-hidden">
         <ToastMessage />
         <LogoBanner />
         <RouterView />
