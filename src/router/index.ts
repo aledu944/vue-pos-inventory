@@ -14,7 +14,7 @@ const router = createRouter({
       path: '/auth',
       name: 'auth',
       redirect: { name: 'auth-login' },
-      component: () => AuthLayout,
+      component: AuthLayout,
       children: [
         {
           name: 'auth-login',
@@ -27,13 +27,13 @@ const router = createRouter({
       path: '/',
       name: 'dashboard',
       redirect: 'products',
-      component: () => MainLayout,
+      component: MainLayout,
       meta: { requiresAuth: true },
       children: [
         {
           path: '/products',
           redirect: 'products',
-          component: () => ProductsLayout,
+          component: ProductsLayout,
           children: [
             {
               path: '/products',
