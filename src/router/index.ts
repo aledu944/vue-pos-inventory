@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import authService from '@/auth/services/auth.service';
 import { useToastStore } from '@/shared/stores/toast';
 
@@ -8,7 +8,7 @@ import UsersLayout from '@/users/layouts/UsersLayout.vue';
 import ProductsLayout from "@/products/layouts/ProductsLayout.vue";
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/auth',
