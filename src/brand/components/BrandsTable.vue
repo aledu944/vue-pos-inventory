@@ -27,15 +27,3 @@ const { brands } = storeToRefs(brandsStore);
         </div>
     </div>
 </template>
-
-<style scoped>
-@import "../../assets/main.css";
-
-.brand__table {
-    @apply bg-white py-8 px-6 rounded-md border border-gray-300 w-full min-w-[800px]
-}
-
-.brand__table--header {
-    @apply grid grid-cols-5 font-bold mb-3
-}
-</style>

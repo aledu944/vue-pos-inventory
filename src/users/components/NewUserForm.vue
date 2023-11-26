@@ -47,11 +47,3 @@ const { handleSubmit, newUser, roles } = useCreateUser();
 
     </form>
 </template>
-
-
-<style>
-.new--user__form {
-    @apply space-y-4 max-w-md mx-auto
-}
-
-</style>

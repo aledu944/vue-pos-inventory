@@ -74,14 +74,3 @@ const productsStore = useProductsStore();
     </div>
 
 </template>
-
-<style scoped>
-    @import "../../assets/main.css";
-    
-    @layer components {
-        .products__table {
-            @apply bg-white py-8 px-6 rounded-md border border-gray-300 w-full min-w-[800px]
-        }
-    }
-
-</style>
