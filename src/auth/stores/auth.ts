@@ -48,6 +48,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     return {
         loginWithCredentials,
-        logout
+        logout,
+        user
     }
 })

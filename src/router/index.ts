@@ -7,6 +7,7 @@ import MainLayout from "../shared/layouts/MainLayout.vue";
 import UsersLayout from '@/users/layouts/UsersLayout.vue';
 import ProductsLayout from "@/products/layouts/ProductsLayout.vue";
 import OrdersLayout from '@/orders/layouts/OrdersLayout.vue';
+import CartLayout from '@/cart/layout/CartLayout.vue';
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -100,10 +101,33 @@ const router = createRouter({
               path: '/orders/:id',
               name: 'order',
               component: () => import('@/orders/views/OrderDetailsView.vue'),
+            },
+            {
+              path: '/orders/checkout',
+              name: 'checkout',
+              component: () => import('@/orders/views/CheckoutView.vue'),
             }
-
           ]
-        }
+        },
+        {
+          path: 'cart',
+          redirect: 'cart',
+          component: OrdersLayout,
+          children: [
+            {
+              path: '/cart',
+              component: CartLayout,
+              children: [
+                {
+                  path: '',
+                  name: 'cart',
+                  component: () => import('@/cart/views/CartView.vue'),
+                }
+
+              ]
+            },
+          ]
+        },
 
       ]
     }

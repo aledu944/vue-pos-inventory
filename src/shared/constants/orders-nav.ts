@@ -4,9 +4,9 @@ export const OrdersNavOptions = [
         description: 'Realiza una nueva venta',
         subOptions: [
             {
-                path: 'products',
-                name: 'Productos',
-                description: 'Lista de productos',
+                path: 'cart',
+                name: 'Carrito',
+                description: 'Genera una nueva venta',
                 icon: 'uil uil-shopping-cart',
             },
         ]
