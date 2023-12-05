@@ -3,12 +3,13 @@
 import { RouterLink } from "vue-router";
 import NavMenuAvatar from "./NavMenuAvatar.vue";
 import { useUiStore } from '@/shared/stores/ui';
-import { NAV_MENU } from "../constants/nav-menu";
+import { useAuthStore } from '../../auth/stores/auth';
+import { storeToRefs } from 'pinia';
 
 const uiStore = useUiStore();
 
-
-
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore)
 
 </script>
 
@@ -19,9 +20,19 @@ const uiStore = useUiStore();
                 Vue <span class="text-gradient">Inventory</span>
             </RouterLink>
             <ul class="hidden md:flex gap-4">
-                <li v-for="option in NAV_MENU" :key="option.pathName">
-                    <RouterLink class="nav__link" active-class="nav__link--active" :to="{ name: option.pathName }">
-                        {{ option.name }}
+                <li>
+                    <RouterLink class="nav__link" active-class="nav__link--active" :to="{ name: 'products' }">
+                        Productos
+                    </RouterLink>
+                </li>
+                <li>
+                    <RouterLink class="nav__link" active-class="nav__link--active" :to="{ name: 'orders' }">
+                        Ventas
+                    </RouterLink>
+                </li>
+                <li>
+                    <RouterLink v-if="user?.role === 'admin'" class="nav__link" active-class="nav__link--active" :to="{ name: 'users' }">
+                        Usuarios
                     </RouterLink>
                 </li>
             </ul>

@@ -1,10 +1,13 @@
 <script setup lang='ts'>
 import { RouterLink } from 'vue-router';
 import { useUiStore } from '../stores/ui';
+import { useAuthStore } from '@/auth/stores/auth';
+import { storeToRefs } from 'pinia';
 
 const uiStore = useUiStore();
 
-
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore);
 
 </script>
 
@@ -24,6 +27,11 @@ const uiStore = useUiStore();
             <RouterLink @click="uiStore.handleMenuState" class="sidemenu__link" active-class="sidemenu__link--active" :to="{ name:'orders' }">
                 <li>
                     Ordenes
+                </li>
+            </RouterLink>
+            <RouterLink  v-if="user?.role === 'admin'" @click="uiStore.handleMenuState" class="sidemenu__link" active-class="sidemenu__link--active" :to="{ name:'users' }">
+                <li>
+                    Usuarios
                 </li>
             </RouterLink>
         </ul>
