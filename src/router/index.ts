@@ -6,6 +6,7 @@ import AuthLayout from "../auth/layouts/AuthLayout.vue";
 import MainLayout from "../shared/layouts/MainLayout.vue";
 import UsersLayout from '@/users/layouts/UsersLayout.vue';
 import ProductsLayout from "@/products/layouts/ProductsLayout.vue";
+import OrdersLayout from '@/orders/layouts/OrdersLayout.vue';
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -70,7 +71,7 @@ const router = createRouter({
         {
           path: '/users',
           redirect: 'users',
-          component: () => UsersLayout,
+          component: UsersLayout,
           meta: { requiresRoleAdmin: true },
           children: [
               {
@@ -88,7 +89,21 @@ const router = createRouter({
         {
           path: 'orders',
           name: 'orders',
-          component: () => import('@/orders/views/OrdersView.vue'),
+          redirect: 'orders',
+          component: OrdersLayout,
+          children: [
+            {
+              path: '/orders',
+              name: 'orders',
+              component: () => import('@/orders/views/OrdersView.vue'),
+            },
+            {
+              path: '/orders/:id',
+              name: 'order',
+              component: () => import('@/orders/views/OrderDetailsView.vue'),
+            }
+
+          ]
         }
 
       ]
