@@ -7,6 +7,7 @@ const orderStore = useOrderStore();
 onMounted(() => {
     orderStore.getAllOrders();
 })
+
 </script>
 
 <template>

@@ -3,8 +3,12 @@
 import { useOrderStore } from '../store/order';
 import { formatDate } from '../../shared/helpers/format-date';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+import { computed } from 'vue';
 
 const orderStore = useOrderStore();
+const orders = computed(() => {
+    return orderStore.orders.reverse();
+})
 
 </script>
 
@@ -26,7 +30,7 @@ const orderStore = useOrderStore();
             <p v-show="orderStore.orders.length === 0" class="text-center font-semibold text-gray-500">No se encontraron
                 ventas</p>
             <ul class="space-y-4">
-                <li v-for="order in orderStore.orders.reverse()" :key="order.id"
+                <li v-for="order in orders" :key="order.id"
                     class="grid items-center grid-cols-7 text-sm gap-[2rem]">
                     <p class="w-full text-gray-500 line-clamp-1">#{{ order.id }}</p>
                     <p class="w-full text-gray-500 line-clamp-1">{{ order.client.name }}</p>
