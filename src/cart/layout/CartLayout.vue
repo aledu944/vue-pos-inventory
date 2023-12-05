@@ -10,13 +10,14 @@ const { cart } = storeToRefs(cartStore);
 </script>
 
 <template>
-    <main class="min-w-full md:flex h-screen">
-        <section>
+    <main class="min-w-full grid md:grid-cols-3 overflow-hidden">
+        <section class="col-span-2 h-[90vh] overflow-y-scroll">
             <RouterView/>
         </section>
-        <section class="max-w-md w-full bg-white ">
+        <section class="col-span-1 bg-white ">
             <div class="p-8">
                 <h2 class="mb-6">Carrito</h2>
+                <p v-if="cart.length === 0" class="text-center uppercase text-slate-500">Tu carrito esta vacio</p>
                 <ul class="space-y-4">
                     <li class="flex justify-between" v-for="{ product, quantity } in cart" :key="product.id">
                         <div>
@@ -35,8 +36,8 @@ const { cart } = storeToRefs(cartStore);
                         </div>
                     </li>
                 </ul>
-                <p class="text-xl font-bold mt-8">Total: {{ formatCurrency(cartStore.total) }}</p>
-                <RouterLink :to="{ name:'checkout' }"  class="btn-secondary text-center block ">Ir a generar venta</RouterLink>
+                <p v-if="cart.length > 0" class="text-xl font-bold mt-8">Total: {{ formatCurrency(cartStore.total) }}</p>
+                <RouterLink v-if="cart.length > 0" :to="{ name:'checkout' }"  class="btn-secondary text-center block ">Ir a generar venta</RouterLink>
             </div>
         </section>
     </main>

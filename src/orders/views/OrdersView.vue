@@ -1,7 +1,12 @@
 <script setup lang='ts'>
 import OrdersTable from "@/orders/components/OrdersTable.vue";
+import { onMounted } from 'vue';
+import { useOrderStore } from '../store/order';
+const orderStore = useOrderStore();
 
-
+onMounted(() => {
+    orderStore.getAllOrders();
+})
 </script>
 
 <template>

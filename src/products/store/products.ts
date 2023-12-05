@@ -5,18 +5,9 @@ import productService from '../services/product.service';
 import type { IProductsResponse } from '../interfaces/products-response';
 
 
-interface ProductsStore {
-    products: Ref<IProductsResponse[]>;
-    createNewProduct(image: any, product: {
-        name: string;
-        description: string;
-        categoryId: string;
-        price: number;
-        stock: number;
-    }): Promise<void>
-}
 
-export const useProductsStore = defineStore('products', (): ProductsStore => {
+
+export const useProductsStore = defineStore('products', () => {
     const isLoading = ref(false);
     const products = ref<IProductsResponse[]>([])
 
@@ -45,6 +36,7 @@ export const useProductsStore = defineStore('products', (): ProductsStore => {
 
     return {
         products,
+        getProducts,
         createNewProduct,
     }
 

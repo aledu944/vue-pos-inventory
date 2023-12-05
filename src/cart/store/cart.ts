@@ -16,14 +16,20 @@ export const useCartStore = defineStore('cart', () => {
 
     function addProductCart(product: IProductsResponse, quantity: number) {
         const productInCart = cart.value.find(item => item.product.id === product.id);
-        if (productInCart) {
+
+        if (productInCart && +productInCart.quantity < +productInCart.product.stock) {
             productInCart.quantity += quantity;    
             calculateTotal();
             return;
         }
+        if( !productInCart ){
 
-        cart.value.push({ product, quantity });
+            cart.value.push({ product, quantity });
+            calculateTotal();
+        }
+
         calculateTotal();
+
     }
 
     function decrementProductQuantity( product: IProductsResponse ) {

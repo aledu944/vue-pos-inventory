@@ -7,6 +7,7 @@ import router from '@/router';
 import { useToastStore } from '@/shared/stores/toast';
 import axios from 'axios';
 import { useCartStore } from '@/cart/store/cart';
+import { useProductsStore } from '@/products/store/products';
 
 export const useOrderStore = defineStore('order', () => {
 
@@ -17,6 +18,7 @@ export const useOrderStore = defineStore('order', () => {
 
     const cartStore = useCartStore();
     const toastStore = useToastStore();
+    const productsStore = useProductsStore();
 
     async function getAllOrders() {
         isLoading.value = true;
@@ -45,17 +47,17 @@ export const useOrderStore = defineStore('order', () => {
                 quantity: item.quantity,
             }
         })
-
         const order = {
             ...sale,
+            total: sale.total,
             items: [...items],
         }
-
 
         try {
             const message = await orderService.create(order);
             toastStore.showToast('success', message)
             await getAllOrders();
+            await productsStore.getProducts();
             router.replace('/orders')
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -73,6 +75,7 @@ export const useOrderStore = defineStore('order', () => {
         order,
         orders,
         isLoading,
+        getAllOrders,
         getOrderById,
         createNewOrder
     }
