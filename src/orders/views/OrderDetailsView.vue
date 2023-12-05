@@ -17,7 +17,9 @@ orderStore.getOrderById(params.id as string);
 
 <template>
     <main class="container pt-8">
+        
         <CircularProgress v-if="isLoading" />
+
         <section  v-else class="bg-white p-8 rounded-md shadow-sm space-y-8">
             <h1 class="mb-8">Detalles de la venta</h1>
 
@@ -26,21 +28,21 @@ orderStore.getOrderById(params.id as string);
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div>
                         <label>Nombre:</label>
-                        <input type="text" disabled :value="order.client.name">
+                        <input type="text" disabled :value="order?.client?.name">
                     </div>
                     <div>
                         <label>Nombre:</label>
-                        <input type="text" disabled :value="order.client.lastname">
+                        <input type="text" disabled :value="order?.client?.lastname">
                     </div>
                     <div>
                         <label>Nombre:</label>
-                        <input type="text" disabled :value="order.client.email">
+                        <input type="text" disabled :value="order?.client?.email">
                     </div>
                 </div>
             </div>
 
             <div>
-                <h2>Detalles</h2>
+                <h2 class="mb-4">Detalles</h2>
                 <div class="grid grid-cols-6 gap-8 font-bold">
                     <h4>Imagen</h4>
                     <h4>Producto</h4>
@@ -55,19 +57,19 @@ orderStore.getOrderById(params.id as string);
                     class="grid grid-cols-6 gap-8 items-center"
                     v-for="{ product, quantity } in order.orderDetails" :key="product.id">
                         <img
-                            :src="product.image"
-                            :alt="product.name"
+                            :src="product?.image"
+                            :alt="product?.name"
                             class="max-w-[70px]"
                         />
-                        <p>{{ product.name }}</p>
-                        <p>{{  formatCurrency( product.price )  }}</p>
+                        <p>{{ product?.name }}</p>
+                        <p>{{  formatCurrency( product.price )}}</p>
                         <p>{{ quantity }}</p>
-                        <p>{{ formatCurrency( product.price * quantity ) }}</p>
-                        <p>{{ formatDate(order.createdAt) }}</p>
+                        <p>{{ formatCurrency( product?.price * quantity ) }}</p>
+                        <p>{{ formatDate(order?.createdAt) }}</p>
                     </li>
                 </ul>
                 <div class="text-end">
-                    <p class="text-xl font-bold">Total: {{ formatCurrency(order.total) }}</p>
+                    <p class="text-xl font-bold">Total: {{ formatCurrency(order!.total) }}</p>
                 </div>
             </div>
 

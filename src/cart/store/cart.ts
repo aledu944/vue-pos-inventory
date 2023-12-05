@@ -5,7 +5,7 @@ import { ref } from "vue";
 import type { ICart } from "../interface/cart";
 
 export const useCartStore = defineStore('cart', () => {
-    
+
     const total = ref(0);
     const cart = ref<ICart[]>([]);
 
@@ -14,24 +14,35 @@ export const useCartStore = defineStore('cart', () => {
     const toastStore = useToastStore();
 
 
-    function addProductCart( product: IProductsResponse, quantity: number){        
+    function addProductCart(product: IProductsResponse, quantity: number) {
         const productInCart = cart.value.find(item => item.product.id === product.id);
-
-        if( productInCart ){
-            productInCart.quantity += quantity;
+        if (productInCart) {
+            productInCart.quantity += quantity;    
             calculateTotal();
             return;
         }
-        
+
         cart.value.push({ product, quantity });
         calculateTotal();
-        console.log(cart.value)
+    }
+
+    function decrementProductQuantity( product: IProductsResponse ) {
+
+        const productInCart = cart.value.find(item => item.product.id === product.id);
+        productInCart!.quantity -= 1;
+
+        if( productInCart?.quantity === 0 ){
+            const updateCart = cart.value.filter(item => item.product.id !== productInCart.product.id);
+            cart.value = updateCart;
+        }
+
+        calculateTotal();
     }
 
     function calculateTotal() {
         let subTotal = 0
 
-        cart.value.forEach(({product, quantity }) => {
+        cart.value.forEach(({ product, quantity }) => {
             subTotal += product.price * quantity
         });
 
@@ -39,46 +50,21 @@ export const useCartStore = defineStore('cart', () => {
 
     }
 
-    function removeProductFromCart(id: string){
+    function removeProductFromCart(id: string) {
         const product = cart.value.findIndex(item => item.product.id === id);
 
 
-        if( product !== -1 ){
+        if (product !== -1) {
             cart.value.splice(product, 1);
             calculateTotal();
         }
     }
 
 
-    async function generateOrder() {
-        const products = cart.value.map(({product, quantity}) => {
-            return {
-                id: product.id,
-                quantity
-            }
-        })
-
-        const order = {
-            client: client.value,
-            total: total.value,
-            products,
-        }
-
-        // try {
-        //     const message = await saleService.create(order);
-        //     toastStore.showToast('success', message);
-
-        //     saleStore.getAllSales();
-        //     router.push('/sales')
-        // } catch (error) {
-        //     console.log(order);
-        //     handleAxiosError(error)
-        // }
-    }
-    
-    
     return {
         addProductCart,
+        removeProductFromCart,
+        decrementProductQuantity,
         cart,
         total
     }

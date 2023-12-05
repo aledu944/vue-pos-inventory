@@ -19,8 +19,20 @@ const { cart } = storeToRefs(cartStore);
                 <h2 class="mb-6">Carrito</h2>
                 <ul class="space-y-4">
                     <li class="flex justify-between" v-for="{ product, quantity } in cart" :key="product.id">
-                        <p class="font-semibold">{{product.name}}</p>
-                        <p>x {{quantity}}</p>
+                        <div>
+                            <p class="font-bold">{{product.name}}</p>
+                            <p class="text-slate-600">SubTotal: {{formatCurrency(product.price * quantity)}}</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center gap-4 border border-slate-300 p-2 rounded-lg">
+                                <i @click="cartStore.decrementProductQuantity(product)" class="uil uil-minus cursor-pointer"></i>
+                                <p>{{quantity}}</p>
+                                <i @click="cartStore.addProductCart(product, 1)" class="uil uil-plus cursor-pointer"></i>
+                            </div>
+                            <div class="text-xl text-red-500 cursor-pointer" @click="cartStore.removeProductFromCart(product.id)">
+                                <i class="uil uil-trash-alt"></i>
+                            </div>
+                        </div>
                     </li>
                 </ul>
                 <p class="text-xl font-bold mt-8">Total: {{ formatCurrency(cartStore.total) }}</p>

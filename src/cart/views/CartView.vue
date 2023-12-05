@@ -12,7 +12,7 @@ const { products } = storeToRefs(productsStore);
     <section class="container pt-8">
         <ul class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 items-center justify-center gap-8">
             <li v-for="product in products" :key="product.id">
-                <CartProductCard :product="product"/>
+                <CartProductCard v-show="+product.stock > 0" :product="product"/>
             </li>
         </ul>        
     </section>

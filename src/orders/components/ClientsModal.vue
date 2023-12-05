@@ -13,10 +13,6 @@ defineProps<{
         type: string;
         clientId: string;
         userId: string | undefined;
-        items: {
-            productId: string;
-            quantity: string | number;
-        }[];
     }
 }>()
 

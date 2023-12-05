@@ -20,27 +20,16 @@ const sale = ref<{
     type: string;
     clientId: string;
     userId: string | undefined;
-    items: { productId: string, quantity: string | number }[];
 }>({
     total: total.value,
     type: '',
     clientId: '',
     userId: user?.id,
-    items: [],
 });
 
 
 const handleSubmit = () => {
-    cart.value.map(item => {
-        sale.value.items.push({
-            productId: item.product.id,
-            quantity: item.quantity
-        })
-    })
-
     orderStore.createNewOrder(sale.value);
-    cart.value = [];
-
 }
 
 </script>
@@ -49,12 +38,31 @@ const handleSubmit = () => {
     <main class="container pt-8 grid md:grid-cols-2 gap-8">
         <section>
             <h1>Confirma la venta</h1>
-            <div class="p-8">
+            <div class="p-8 bg-white">
                 <h2 class="mb-6">Carrito</h2>
                 <ul class="space-y-4">
                     <li class="flex justify-between" v-for="{ product, quantity } in cart" :key="product.id">
-                        <p class="font-semibold">{{ product.name }}</p>
-                        <p>x {{ quantity }}</p>
+                        <div class="flex items-center gap-4">
+                            <div class="bg-slate-200 p-2 rounded-xl">
+                                <img :src="product.image" class="max-w-[60px]" />
+                            </div>
+                            <div>
+                                <p class="font-bold">{{ product.name }}</p>
+                                <p class="text-slate-600">Precio: {{ formatCurrency(product.price) }}</p>
+                                <p class="text-slate-600">SubTotal: {{ formatCurrency(product.price * quantity) }}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center gap-4 border border-slate-300 p-2 rounded-lg">
+                                <i @click="cartStore.decrementProductQuantity(product)" class="uil uil-minus cursor-pointer"></i>
+                                <p>{{ quantity }}</p>
+                                <i @click="cartStore.addProductCart(product, 1)" class="uil uil-plus cursor-pointer"></i>
+                            </div>
+                            <div class="text-xl text-red-500 cursor-pointer"
+                                @click="cartStore.removeProductFromCart(product.id)">
+                                <i class="uil uil-trash-alt"></i>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>

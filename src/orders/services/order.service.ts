@@ -52,7 +52,7 @@ async function findById(id: string) {
 
 async function create(sale:any) {
     const token = localStorage.getItem('AUTH_INVENTORY_TOKEN');
-
+    console.log({sale})
     try {
         const { data } = await inventoryDb.post(`/orders`, sale, {
             headers: {
@@ -63,10 +63,7 @@ async function create(sale:any) {
         return data.message;
 
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            const errorMessage = error.response?.data.message;
-            toastStore.showToast('error', Array.isArray(errorMessage) ? errorMessage[0] : errorMessage)
-        }
+        throw error;
     }
 }
 
