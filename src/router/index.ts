@@ -88,7 +88,6 @@ const router = createRouter({
         },
         {
           path: 'orders',
-          name: 'orders',
           redirect: 'orders',
           component: OrdersLayout,
           children: [
