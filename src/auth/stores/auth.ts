@@ -28,6 +28,12 @@ export const useAuthStore = defineStore('auth', () => {
             return;
         }
 
+        if( data.user.role === 'user' ){
+            isLoading.value = false;
+            toastStore.showToast('error', 'Clientes no pueden acceder al sistema')
+            return;
+        }
+
         localStorage.setItem('AUTH_INVENTORY_TOKEN', data.token);
         localStorage.setItem('AUTH_INVENTORY_USER', JSON.stringify(data.user));
 
