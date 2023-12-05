@@ -59,6 +59,7 @@ const productsStore = useProductsStore();
                                     </MenuItem>
                                     <MenuItem v-slot="{ active }">
                                         <button
+                                            @click="productsStore.deleteProduct(product.id)"
                                             :class="[ active ? 'bg-red-500 text-white' : 'text-gray-900', 'group flex w-full items-center rounded-md px-2 py-2 text-sm' ]"
                                             class="flex gap-4"
                                         >

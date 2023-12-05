@@ -74,6 +74,11 @@ export const useProductsStore = defineStore('products', () => {
         router.back();
     }
 
+    async function deleteProduct(id:string) {
+        await productService.remove(id);
+        getProducts();
+    }
+
     onMounted( async () => {
         getProducts();
     })
@@ -85,7 +90,8 @@ export const useProductsStore = defineStore('products', () => {
         getProducts,
         createNewProduct,
         getProductById,
-        updateProduct
+        updateProduct,
+        deleteProduct
     }
 
 });

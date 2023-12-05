@@ -63,8 +63,14 @@ async function create(image: any, product: { name: string, description: string, 
 }
 
 async function remove(id:string) {
+    const token = localStorage.getItem('AUTH_INVENTORY_TOKEN');
+
     try {
-        await inventoryDb.delete(`/products/${id}`);
+        await inventoryDb.delete(`/products/${id}`, {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        });
         toastStore.showToast('success', "Producto eliminado")
 
     } catch (error) {
